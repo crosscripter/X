@@ -1,0 +1,1 @@
+exit: dump `process.exit(0)`
