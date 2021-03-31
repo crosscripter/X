@@ -1,16 +1,13 @@
-'use strict'
 const fs = require('fs')
 
-/* Internals */
 let stack = []
 let debug = false
 let log = console.log
 let pop = () => stack.pop()
 let push = x => { stack.push(x); return; }
 
-/* Parsing */
 const EXT = '.x'
-const DELIMTER = /:/g
+const DELIMTER = / = /g
 const OBJECT = /^\{.*?\}$/
 const QUOTE = /^\((.*)\)$/g
 const USE = /^use (.*)\s*$/g
@@ -30,7 +27,6 @@ let getSyntax = x => x.replace(SYNTAX, trim)
 let addSyntax = x => syntax.unshift(x)
 let isObject = x => OBJECT.test(x)
 
-/* Debugger */
 let padding = 15
 let spaces = len => Array.from({length:len}).fill(' ').join('')
 let pad = (x, len) => spaces(len).replace(new RegExp(`^(\\s{${x.length}})(\\s+)$`), `${x}$2`)
@@ -39,7 +35,6 @@ let trace = cmd => {
     log(`>> ${pad(cmd,padding)}=> ${JSON.stringify(stack.join(' '))}`)
 }
 
-/* Interpreter */
 let cmd = (cmd, word) => {    
     if (isQuote(cmd)) cmd = `(()=>"${getQuote(cmd)}")`    
     if (isSyntax(cmd)) addSyntax(getSyntax(cmd))
@@ -56,7 +51,7 @@ let cmd = (cmd, word) => {
     if (debug && !word) trace(cmd)
 }
 
-let uncomment = text => text.replace(/\/\*(.|(\r\n|\r|\n))*?\*\//gm, '').trim()
+let uncomment = text => text.replace(/^#(.|(\r\n|\r|\n))*?$/gm, '').trim()
 let join = text => text.replace(new RegExp(`(?:${NEWLINES})+[ \\t]+(.*)`,'g'), ' $1')
 let lines = text => join(uncomment(text)).split(new RegExp(NEWLINES,'g'))
 let all = items => items.filter(item => item).map(item => item.trim())
@@ -68,13 +63,12 @@ let word = (name, code) => {
     if (debug) log("-- " + name + " defined")
 }
 
-/* Module loader */
 let run = code => all(lines(code)).forEach(line => {
     let [left, ...right] = all(line.split(DELIMTER))
     let expr = right.join('').trim()
     if (isImport(left)) use(getImport(left))
     else if (isSyntax(left)) addSyntax(getSyntax(left))
-    else if (line.includes(':')) word(left, expr)
+    else if (line.includes(' = ')) word(left, expr)
     else exec(line)
 })
 
@@ -87,8 +81,22 @@ let use = this['use'] = module => {
 
 let args = process.argv.splice(2)
 let [main, ...flags] = args
-if (!main) return log("Usage: $ vm <main> <flags...>")
 
-let code = read(main)
-use('core')
-run(code)
+if (main) {
+    use('core')
+    return run(read(main))
+}
+
+const { createInterface } = require('readline')
+
+with (createInterface(process.stdin, process.stdout)) {
+    use('core')
+    setPrompt('> ')
+    
+    on('line', line => { 
+        try { run(line + ' dump') } catch (e) { log('!', e) }
+        prompt() 
+    })
+
+    prompt()
+}

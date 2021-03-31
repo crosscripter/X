@@ -1,1 +1,1 @@
-say-hello: "Hello, World!" print
+say-hello = "Hello, World!" print

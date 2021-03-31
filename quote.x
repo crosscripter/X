@@ -1,2 +1,3 @@
 syntax /(\([^\)]*?\))/
-call: `let q=pop()(); exec(q,q)`
+call = `let q=pop()(); exec(q,q)`
+!! = call

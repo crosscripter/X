@@ -1,4 +1,4 @@
-& : `pop() & pop()`
-| : `pop() | pop()`
-not: `! pop()`
-! : not
+& = `pop() & pop()`
+| = `pop() | pop()`
+not = `! pop()`
+! = not

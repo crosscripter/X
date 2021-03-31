@@ -1,6 +1,6 @@
 syntax /(\"[^\"]*?\")/
 syntax /(\'[^\']*?\')/
 
-str: `pop().toString()`
-len: `pop().length`
-slen: str len
+str = `pop().toString()`
+len = `pop().length`
+slen = str len

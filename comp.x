@@ -1,6 +1,6 @@
-< : swap `pop() < pop()`
-<= : swap `pop() <= pop()`
-> : swap `pop() > pop()`
->= : swap `pop() >= pop()`
-== : `pop() === pop()`
-!= : == not
+< = swap `pop() < pop()`
+<= = swap `pop() <= pop()`
+> = swap `pop() > pop()`
+>= = swap `pop() >= pop()`
+== = `pop() === pop()`
+!= = == not

@@ -1,32 +1,31 @@
-/* core.x
-The core vocabulary. Imports all necessary and common vocabs
-needed when doing general programming.
-*/
+# core.x
+# The core vocabulary. Imports all necessary and common vocabs
+# needed when doing general programming.
+#
 
-/* Define syntax */
+# Define syntax
 use syntax
 
-/* System */
+# System
 use sys
 use debug
 use meta
 
-/* Stack manipulation */
+# Stack manipulation
 use stack
 
-/* Data types */
+# Data types 
 use bool
 use string
 use list
 use map
 
-
-/* Quotes */
+# Quotes
 use quote
 
-/* Operators */
+# Operators
 use comp
 use math
 
-/* IO */
+# IO 
 use io

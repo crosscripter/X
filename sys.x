@@ -1,1 +1,1 @@
-exit: dump `process.exit(0)`
+exit = dump `process.exit(0)`
