@@ -1,2 +1,2 @@
-dump = `log(JSON.stringify(stack))`
+dump = `log(stack)`
 debug = `debug=!debug; null`

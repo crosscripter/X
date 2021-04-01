@@ -94,7 +94,13 @@ with (createInterface(process.stdin, process.stdout)) {
     setPrompt('> ')
     
     on('line', line => { 
-        try { run(line + ' dump') } catch (e) { log('!', e) }
+        if (!line.trim()) return prompt()
+        try { 
+            run(line)
+            if (line !== 'dump') exec('dump') 
+        } catch (e) { 
+            log('!', e) 
+        }
         prompt() 
     })
 

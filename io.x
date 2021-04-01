@@ -1,6 +1,6 @@
 print = `log(pop())`
 . = print
 
-read = `let path = pop();
+read = `let path=pop();
        fs.readFileSync(path,'utf8');
        `
