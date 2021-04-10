@@ -1,0 +1,1 @@
+answer = () => push(42)

@@ -1,0 +1,1 @@
+now = 'new Date()' js
