@@ -50,7 +50,7 @@ Now let's learn the language, X is all about simplicity and minimalism.
 ## Comments
 
 ```rb
-# Comments start with hash sign and end and the end of the line.
+# Comments start with hash sign and end at the end of the line.
 ```
 
 ```rb
