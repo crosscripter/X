@@ -212,6 +212,8 @@ You can also call ops from other modules
 Here we call the `len` op from the `list` module
 ```rb
 clear [1,2,3,4,5] len print
+
+# 5
 ```
 
 #### User-Defined Ops
@@ -292,15 +294,22 @@ Or how about use Python list comprehensions in X?
 ```
 
 ## Shorthand Syntax
-Or we can go all pascal like and use super shorthand programming using aliases 
+Or we can go all Perl like and use super cryptic shorthand programming using aliases 
 ```rb
+# <> = swap
+# $* = times
+# times = repeat
+
 stars = '*' <> $* 
+# start = '*' swap times 
+
 4 stars print
 # ****
 ```
 
 ## Metaprogramming
-X also allows some metaprogramming with eval
+X also allows some metaprogramming with `eval`
+Evaluate any X code as a string and push onto the stack!
 ```rb
 '4 10 * 2 + .' eval 
 40 '2 +' => .
@@ -309,16 +318,19 @@ X also allows some metaprogramming with eval
 ```
 
 ## File IO
-How about some real world stuff, like file IO?
+Cool, cool, cool. How do I do some real world stuff, like file IO?
+Glad you asked -- basically you just `read` and `write`!
 ```rb
 file = 'test.txt'
-content = 'This is a test!' 
+text = 'This is a test!' 
 
 # Write content to file
-file content write
-# []
+# Alias for write is f>
+file text write
+# [] (test.txt written)
 
 # Read content from file and print
+# alias for read is <f
 file read print 
 # This is a test!
 
@@ -335,18 +347,21 @@ What langugage would be complete without flow control?
 ```rb
 x = 4 
 x true '2 +' '3 *' if eval print
+# 6 
 
 # Shorthand syntax using ?
-true 1 0 ? .
+true 1 0 ?
+# [1]
 ```
 
 #### Switch / Case / Match 
 ```rb
 # Switch case/matching
-cases = {true: '2 +', false: '3 *'} 
+cases = { true: '2 +', false: '3 *' } 
 x cases true case eval print
 
 # Using shorthand syntax
+# Alias version is ->
 x cases false -> => .
 ```
 
@@ -354,7 +369,8 @@ x cases false -> => .
 
 #### Map
 ```rb
-[1,2,3,4,5] '2 **' map print
+# Alias for map is @>
+[1,2,3,4,5] '2 **' @> .
 ['abc','def',"ghi"] 'upper "!" cat' map print 
 ```
 
