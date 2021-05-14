@@ -1,0 +1,5 @@
+#!/bin/bash
+node xsm
+tar -czf lib *.xsm *.js
+mv lib ..
+rm *.xsm

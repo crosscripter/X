@@ -1,1 +1,0 @@
-answer = () => push(42)

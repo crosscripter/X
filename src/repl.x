@@ -1,0 +1,1 @@
+`with (require('readline').createInterface(process.stdin, process.stdout)) { setPrompt(''); on('line', line => line && (run(line), stack.length && dump(), prompt())); prompt() }`

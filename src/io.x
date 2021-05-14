@@ -1,0 +1,2 @@
+. = print
+print = `log(pop())`
